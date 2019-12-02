@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -27,7 +28,13 @@ public class HomeController {
         movie.setYear(2017);
 
         movie.setDescription("About Emojies...");
-        Set<Movie> movies new HashSet<Movie>();
+        Set<Movie> movies = new HashSet<Movie>();
         movies.add(movie);
+
+        actor.setMovies(movies);
+        actorRepository.save(actor);
+
+        model.addAttribute("actors", actorRepository.findAll());
+        return "index";
     }
 }
